@@ -6,15 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI support for Scheduled Time setting
-LUCI_DEPENDS:=+luci
 LUCI_PKGARCH:=all
-PKG_NAME:=luci-app-autotimeset
-PKG_VERSION:=1.4
-PKG_RELEASE:=5
 
-PKG_MAINTAINER:=sirpdboy  https://github.com/sirpdboy/luci-app-autotimeset
+PKG_VERSION:=1.5-20220426
+PKG_RELEASE:=
 
-define Package/luci-app-eqos/conffiles
+define Package/$(PKG_NAME)/conffiles
 /etc/config/autotimeset
 endef
 
