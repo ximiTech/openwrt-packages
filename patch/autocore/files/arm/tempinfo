@@ -11,7 +11,7 @@ else
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
 fi
 
-DRV=/sys/kernel/debug/qca-nss-drv
+DRV="/sys/kernel/debug/qca-nss-drv"
 NSS_LOAD="$(awk '{print$1}' "$DRV"/stats/cpu_load_ubi | awk '$1=$1' | tail -n 1)"
 
 
@@ -20,10 +20,11 @@ if grep -q "ipq40xx" "/etc/openwrt_release"; then
 elif grep -q "bcm53xx" "/etc/openwrt_release"; then
 	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
 	echo -n "CPU: ${cpu_temp}"
-elif grep -q "ipq806x ipq807x" "/etc/openwrt_release"; then
+elif grep -q "ipq807x" "/etc/openwrt_release"; then
 	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}, NSS: ${NSS_LOAD}"		
 else
 	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
 fi
+
