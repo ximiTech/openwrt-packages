@@ -11,20 +11,12 @@ else
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
 fi
 
-DRV="/sys/kernel/debug/qca-nss-drv"
-NSS_LOAD="$(awk '{print$1}' "$DRV"/stats/cpu_load_ubi | awk '$1=$1' | tail -n 1)"
-
+cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
 	echo -n "WiFi:${mt76_temp} ${wifi_temp}"
-elif grep -q "bcm53xx" "/etc/openwrt_release"; then
-	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
-	echo -n "CPU: ${cpu_temp}"
-elif grep -q "ipq807x" "/etc/openwrt_release"; then
-	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
-	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}, NSS: ${NSS_LOAD}"		
-else
-	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
+elif grep -q "bcm53xx" "/etc/openwrt_release"; then	
+	echo -n "CPU: ${cpu_temp}"	
+else	
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
 fi
-
