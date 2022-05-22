@@ -40,7 +40,6 @@ jobs:
         rm -rf ./luci-app-easymesh
         rm -rf ./luci-app-ikoolproxy
         rm -rf ./luci-app-kodexplorer
-        rm -rf ./luci-app-openclash
         rm -rf ./theme-18.06/luci-theme-edge
         rm -rf ./theme-18.06/luci-theme-infinityfreedom
         rm -rf ./theme-18.06/luci-theme-neobird
@@ -60,11 +59,8 @@ jobs:
         rm -rf ./op-aliyun/*
         rm -rf ./op-socat/socat
         rm -rf ./patch/wall
-        rm -rf ./patch/luci-app-ssr-plus
+        rm -rf ./patch/luci-wall
         rm -rf ./patch/redsocks2
-        rm -rf ./patch/luci-app-bypass
-        rm -rf ./patch/luci-app-passwall
-        rm -rf ./patch/luci-app-passwall2
         
  
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
@@ -73,7 +69,6 @@ jobs:
         git clone https://github.com/yaof2/luci-app-ikoolproxy ./luci-app-ikoolproxy
         rm -rf ./luci-app-ikoolproxy/.github        
         svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-kodexplorer ./luci-app-kodexplorer
-        svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./luci-app-openclash
         
         svn export https://github.com/lisaac/luci-lib-docker/trunk/collections/luci-lib-docker ./lisaac/luci-lib-docker
         svn export https://github.com/lisaac/luci-app-diskman/trunk/applications/luci-app-diskman ./lisaac/luci-app-diskman
@@ -113,11 +108,11 @@ jobs:
         
         git clone https://github.com/xiaorouji/openwrt-passwall ./patch/wall
         rm -rf ./patch/wall/.github
-        svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/luci-app-passwall
-        svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/luci-app-ssr-plus
         svn export https://github.com/coolsnowwolf/packages/trunk/net/redsocks2 ./patch/redsocks2
-        svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/luci-app-bypass
-        svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 ./patch/luci-app-passwall2
+        svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/luci-wall/luci-app-passwall
+        svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/luci-wall/luci-app-ssr-plus
+        svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/luci-wall/luci-app-bypass
+        svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/luci-wall/luci-app-openclash
         
         svn export https://github.com/coolsnowwolf/packages/trunk/net/socat op-socat/socat
         
