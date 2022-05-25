@@ -16,6 +16,9 @@
 | op-smartdns | smartdns套件 |
 | op-webdav | openwrt开启webdav |
 | theme-18.06 | 适用于Openwrt 18.06的主题 |
+| patch/luci-wall | 各种fq工具 |
+| patch/wall | fq工具的各种依赖 |
+| patch/redsocks2 | ssr-p的依赖 |
 
 
 |插件名|说明 |
@@ -29,7 +32,6 @@
 | luci-app-ikoolproxy | ikoolproxy |
 | luci-app-iperf3-server | 去广告 |
 | luci-app-kodexplorer | 可道云 |
-| luci-app-openclash | OpenClash翻X工具 |
 | luci-app-poweroff | 关机 |
 | luci-app-pushbot | 微信推送 |
 | luci-app-serverchan | Server酱推送 |
