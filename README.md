@@ -16,7 +16,7 @@
 | op-smartdns | smartdns套件 |
 | op-webdav | openwrt开启webdav |
 | theme-18.06 | 适用于Openwrt 18.06的主题 |
-| patch/luci-wall | 各种fq工具 |
+| patch/wall-luci | 各种fq工具 |
 | patch/wall | fq工具的各种依赖 |
 | patch/redsocks2 | ssr-p的依赖 |
 
