@@ -2,11 +2,13 @@
 
 #### 个人自用OpenWrt插件库
 
-|文件夹名|说明 |
+| 插件 | 说明 |
 | :----: | :----: |
 | homelede | Hoemlede开发的端口转发和HomeConnect VPN服务 |
-| jerrykuku | jerrykuku开发的相关插件：argon等 |
+| jerrykuku | jerrykuku开发的相关插件：hello world/argon等 |
+| k3 | 斐讯K3的屏幕套件和USB开关 |
 | linkease | 酷友社开发的DDNSTO远程穿透、易有云存储端、iStore、QuickStart便捷首页等 |
+| lisaac | lisaac开发的插件：dockerman和diskman |
 | op-aliyun | 阿里云webdav和fuse |
 | op-cpulimit | CPU占用率限制 |
 | op-fileBrowser | fileBrowser套件 |
@@ -18,11 +20,6 @@
 | theme-18.06 | 适用于Openwrt 18.06的主题 |
 | patch/wall-luci | 各种fq工具 |
 | patch/wall | fq工具的各种依赖 |
-| patch/redsocks2 | ssr-p的依赖 |
-
-
-|插件名|说明 |
-| :----: | :----: |
 | luci-app-adguardhome | adguardhome |
 | luci-app-advanced | 高级设置 |
 | luci-app-aria2 | Aria2优化版 |
