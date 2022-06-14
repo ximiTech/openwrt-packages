@@ -61,9 +61,7 @@ jobs:
         rm -rf ./op-mosdns/*
         rm -rf ./op-alist/*
         rm -rf ./patch/wall
-        rm -rf ./patch/wall-luci/luci-app-bypass
-        rm -rf ./patch/wall-luci/luci-app-openclash
-        rm -rf ./patch/wall-luci/luci-app-passwall
+        rm -rf ./patch/wall-luci
         
  
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
@@ -113,7 +111,7 @@ jobs:
         rm -rf ./patch/wall/.github
         svn export https://github.com/coolsnowwolf/packages/trunk/net/redsocks2 ./patch/wall/redsocks2
         svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/wall-luci/luci-app-passwall
-        ## svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/wall-luci/luci-app-ssr-plus
+        svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/wall-luci/luci-app-ssr-plus
         svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
         svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
         
