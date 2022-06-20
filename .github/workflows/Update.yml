@@ -40,6 +40,7 @@ jobs:
         rm -rf ./luci-app-easymesh
         rm -rf ./luci-app-ikoolproxy
         rm -rf ./luci-app-kodexplorer
+        rm -rf ./luci-app-unblockneteasemusic
         rm -rf ./theme-18.06/luci-theme-edge
         rm -rf ./theme-18.06/luci-theme-infinityfreedom
         rm -rf ./theme-18.06/luci-theme-neobird
@@ -117,6 +118,8 @@ jobs:
         git clone https://github.com/sbwml/luci-app-mosdns ./op-mosdns/
         git clone https://github.com/jjm2473/openwrt-alist ./op-alist/
         rm -rf ./op-alist/.github
+        git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
+        rm -rf ./luci-app-unblockneteasemusic/.github
         
 
     - name: Apply
