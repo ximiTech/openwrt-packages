@@ -33,6 +33,7 @@
 | luci-app-pushbot | 微信推送 |
 | luci-app-serverchan | Server酱推送 |
 | luci-app-syncdial | 多线多拨 |
+| luci-app-unblockneteasemusic | 解除网易云音乐播放限制 |
 | speedtestpp | 终端测网速 |
 
 
