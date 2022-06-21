@@ -116,7 +116,7 @@ jobs:
         
         svn export https://github.com/coolsnowwolf/packages/trunk/net/socat ./op-socat/socat
         git clone https://github.com/sbwml/luci-app-mosdns ./op-mosdns/
-        git clone https://github.com/jjm2473/openwrt-alist ./op-alist/
+        git clone https://github.com/sbwml/openwrt-alist ./op-alist/
         rm -rf ./op-alist/.github
         git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
         rm -rf ./luci-app-unblockneteasemusic/.github
