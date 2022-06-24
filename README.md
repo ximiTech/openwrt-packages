@@ -22,7 +22,6 @@
 | patch/wall | fq工具的各种依赖 |
 | luci-app-adguardhome | adguardhome |
 | luci-app-advanced | 高级设置 |
-| luci-app-aria2 | Aria2优化版 |
 | luci-app-autotimeset | 定时设置 |
 | luci-app-easymesh | 高通CPU的简单MESH |
 | uci-app-eqos | 简单的IP限速 |
