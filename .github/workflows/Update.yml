@@ -21,8 +21,8 @@ jobs:
 
     - name: Set git
       run : |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
+        git config --global user.email "jsjson@163.com"
+        git config --global user.name "xiangfeidexiaohuo"
         sudo timedatectl set-timezone "Asia/Shanghai"
 
     - name: Delete workflow runs
@@ -125,6 +125,6 @@ jobs:
     - name: Apply
       run: |
         git add .
-        git commit -m "Sync: $(date +%Y-%m-%d" "%H:%M)"
+        git commit -m "Auto Sync: $(date +%Y-%m-%d" "%H:%M)"
         git push -f 
               
