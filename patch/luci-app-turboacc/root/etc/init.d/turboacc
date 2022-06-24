@@ -32,20 +32,27 @@ start_pdnsd() {
 	[ -d "/var/run/dnscache" ] || mkdir -p "/var/run/dnscache"
 	cat > "/var/run/dnscache/dnscache.conf" <<EOF
 global {
-    perm_cache=1024;        # dns缂撳瓨澶у皬锛屽崟浣岾B锛屽缓璁笉瑕佸啓鐨勫お澶?    cache_dir="/var/dnscache";     # 缂撳瓨鏂囦欢鐨勪綅缃?    pid_file = /var/run/dnscache.pid;
-    server_ip = 127.0.0.1;        # pdnsd鐩戝惉鐨勭綉鍗★紝0.0.0.0鏄叏閮ㄧ綉鍗?    server_port=5333;           # pdnsd鐩戝惉鐨勭鍙ｏ紝涓嶈鍜屽埆鐨勬湇鍔″啿绐佸嵆鍙?    status_ctl = on;
-    paranoid=on;                  # 浜屾璇锋眰妯″紡锛屽鏋滆姹備富DNS鏈嶅姟鍣ㄨ繑鍥炵殑鏄瀮鍦惧湴鍧€锛屽氨鍚戝鐢ㄦ湇鍔″櫒璇锋眰
+    perm_cache=1024;        # dns缓存大小，单位KB，建议不要写的太大
+    cache_dir="/var/dnscache";     # 缓存文件的位置
+    pid_file = /var/run/dnscache.pid;
+    server_ip = 127.0.0.1;        # pdnsd监听的网卡，0.0.0.0是全部网卡
+    server_port=5333;           # pdnsd监听的端口，不要和别的服务冲突即可
+    status_ctl = on;
+    paranoid=on;                  # 二次请求模式，如果请求主DNS服务器返回的是垃圾地址，就向备用服务器请求
     query_method=udp_only;
     neg_domain_pol = off;
-    par_queries = 400;          # 鏈€澶氬悓鏃惰姹傛暟
-    min_ttl = 1h;               # DNS缁撴灉鏈€鐭紦瀛樻椂闂?    max_ttl = 1w;               # DNS缁撴灉鏈€闀跨紦瀛樻椂闂?    timeout = 10;               # DNS璇锋眰瓒呮椂鏃堕棿锛屽崟浣嶇
+    par_queries = 400;          # 最多同时请求数
+    min_ttl = 1h;               # DNS结果最短缓存时间
+    max_ttl = 1w;               # DNS结果最长缓存时间
+    timeout = 10;               # DNS请求超时时间，单位秒
 }
 
 server {
     label = "routine";
-    ip = ${dns_caching_dns};     # 杩欓噷涓轰富瑕佷笂绾?dns 鐨?ip 鍦板潃锛屽缓璁～鍐欎竴涓綋鍦版渶蹇殑DNS鍦板潃
-    timeout = 5;              # DNS璇锋眰瓒呮椂鏃堕棿
-    reject = 74.125.127.102,  # 浠ヤ笅鏄剰IP锛屼篃灏辨槸DNS姹℃煋涓€鑸細杩斿洖鐨勭粨鏋滐紝濡傛灉鏀跺埌濡備笅DNS缁撴灉浼氳Е鍙戜簩娆¤姹傦紙TCP鍗忚涓€鑸笉浼氱鍒拌剰IP锛?        74.125.155.102,
+    ip = ${dns_caching_dns};     # 这里为主要上级 dns 的 ip 地址，建议填写一个当地最快的DNS地址
+    timeout = 5;              # DNS请求超时时间
+    reject = 74.125.127.102,  # 以下是脏IP，也就是DNS污染一般会返回的结果，如果收到如下DNS结果会触发二次请求（TCP协议一般不会碰到脏IP）
+        74.125.155.102,
         74.125.39.102,
         74.125.39.113,
         209.85.229.138,
@@ -107,8 +114,10 @@ server {
 }
 
 server {
-    label = "special";                  # 杩欎釜闅忎究鍐?    ip = 117.50.10.10,52.80.52.52,119.29.29.29; # 杩欓噷涓哄鐢―NS鏈嶅姟鍣ㄧ殑 ip 鍦板潃
-    port = 5353;                        # 鎺ㄨ崘浣跨敤53浠ュ鐨勭鍙ｏ紙DNS鏈嶅姟鍣ㄥ繀椤绘敮鎸?    proxy_only = on;
+    label = "special";                  # 这个随便写
+    ip = 117.50.10.10,52.80.52.52,119.29.29.29; # 这里为备用DNS服务器的 ip 地址
+    port = 5353;                        # 推荐使用53以外的端口（DNS服务器必须支持
+    proxy_only = on;
     timeout = 5;
 }
 
@@ -209,7 +218,7 @@ change_dns() {
 }
 
 revert_dns() {
-	[ -e "/var/run/dnscache/.dns-changed" ] || return 1
+	[ -e "/var/run/dnscache/.dns-changed" ] && return 1
 
 	uci -q del_list dhcp.@dnsmasq[0].server="127.0.0.1#5333"
 	uci set dhcp.@dnsmasq[0].resolvfile="/tmp/resolv.conf.d/resolv.conf.auto"
@@ -226,15 +235,23 @@ start(){
 	uci set firewall.@defaults[0].flow_offloading_hw="${hw_flow}"
 	uci set firewall.@defaults[0].fullcone="${fullcone_nat}"
 	uci commit firewall
-	
+
 	/etc/init.d/turboacc_fss start
 
 	[ "${sw_flow}" -eq "0" ] && [ "${hw_flow}" -eq "1" ] && {
 		lsmod | grep -q mtkhnat || modprobe mtkhnat
 	}
 
-	[ "${sw_flow}" -ne "1" ] && [ "${sfe_flow}" -eq "1" ] && {
-		/etc/init.d/shortcut-fe start
+	[ "${sw_flow}" -ne "1" ] && {
+		[ "${sfe_flow}" -eq "1" ] && {
+				/etc/init.d/shortcut-fe enabled || /etc/init.d/shortcut-fe enable
+				/etc/init.d/shortcut-fe start
+		}
+		[ "${sfe_flow}" -eq "0" ] && [ -e "/etc/init.d/shortcut-fe" ] && \
+		/etc/init.d/shortcut-fe enabled && {
+			/etc/init.d/shortcut-fe stop 2>"/dev/null"
+			/etc/init.d/shortcut-fe disable
+		}
 	}
 
 	if [ "${bbr_cca}" -eq "1" ];  then
@@ -283,9 +300,11 @@ stop(){
 		lsmod | grep -q mtkhnat && rmmod mtkhnat
 	}
 
-	[ "${sfe_flow}" -eq "0" ] && {
-		/etc/init.d/shortcut-fe stop 2>"/dev/null"
-		/etc/init.d/shortcut-fe enabled && /etc/init.d/shortcut-fe disable
+	[ "${sfe_flow}" -ne "1" ] && {
+		[ -e "/etc/init.d/shortcut-fe" ] && {
+			/etc/init.d/shortcut-fe stop 2>"/dev/null"
+			/etc/init.d/shortcut-fe enabled && /etc/init.d/shortcut-fe disable
+		}
 	}
 
 	stop_dnscache
@@ -315,7 +334,7 @@ check_status(){
 		if [ "$(cat "/sys/module/xt_FLOWOFFLOAD/refcnt" 2>"/dev/null" || echo 0)" -ne "0" ]; then
 			echo -n "Flow Offloading"
 			exit 0
-		elif [ "$(cat "/sys/module/xt_FLOWOFFLOAD/refcnt" 2>"/dev/null")" -eq "0" ] && \
+		elif [ "$(cat "/sys/module/xt_FLOWOFFLOAD/refcnt" 2>"/dev/null" || echo 0)" -eq "0" ] && \
 		    [ -e /sys/kernel/debug/hnat/hnat_version ]; then
 			echo -n "MediaTek HWNAT"
 			exit 0
