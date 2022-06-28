@@ -1,10 +1,13 @@
 m = Map("mosdns")
 
-s = m:section(TypedSection, "mosdns", translate("Update GeoIP & GeoSite dat"))
+s = m:section(TypedSection, "mosdns", translate("Geodata Update"))
 s.addremove = false
 s.anonymous = true
 
 enable = s:option(Flag, "geo_auto_update", translate("Enable Auto Database Update"))
+enable.rmempty = false
+
+enable = s:option(Flag, "syncconfig", translate("Enable Config Update"))
 enable.rmempty = false
 
 o = s:option(ListValue, "geo_update_week_time", translate("Update Cycle"))
@@ -18,7 +21,7 @@ o:value("6", translate("Every Saturday"))
 o:value("7", translate("Every Sunday"))
 o.default = "*"
 
-update_time = s:option(ListValue, "geo_update_day_time", translate("Update Time"))
+update_time = s:option(ListValue, "geo_update_day_time", translate("Update Time (Every Day)"))
 for t = 0, 23 do
   update_time:value(t, t..":00")
 end
@@ -28,7 +31,7 @@ data_update = s:option(Button, "geo_update_database", translate("Database Update
 data_update.inputtitle = translate("Check And Update")
 data_update.inputstyle = "reload"
 data_update.write = function()
-  luci.sys.exec("/usr/share/mosdns/update_geodat.sh &> /dev/null &")
+  luci.sys.exec("/etc/mosdns/mosupdater.sh &> /dev/null &")
 end
 
 return m

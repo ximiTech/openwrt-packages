@@ -11,87 +11,75 @@ s.anonymous = true
 enable = s:option(Flag, "enabled", translate("Enable"))
 enable.rmempty = false
 
-configfile = s:option(ListValue, "configfile", translate("Config File"))
-configfile:value("/etc/mosdns/config.yaml", translate("Default Config"))
-configfile:value("/etc/mosdns/config_custom.yaml", translate("Custom Config"))
-configfile.default = "/etc/mosdns/config.yaml"
+configfile = s:option(ListValue, "configfile", translate("MosDNS Config File"))
+configfile:value("./def_config.yaml", translate("Def Config"))
+configfile:value("./cus_config.yaml", translate("Cus Config"))
+configfile.default = "./def_config.yaml"
 
 listenport = s:option(Value, "listen_port", translate("Listen port"))
 listenport.datatype = "and(port,min(1))"
 listenport.default = 5335
-listenport:depends( "configfile", "/etc/mosdns/config.yaml")
+listenport:depends( "configfile", "./def_config.yaml")
 
-loglevel = s:option(ListValue, "log_level", translate("Log Level"))
-loglevel:value("debug", translate("Debug"))
-loglevel:value("info", translate("Info"))
-loglevel:value("warn", translate("Warning"))
-loglevel:value("error", translate("Error"))
-loglevel.default = "info"
-loglevel:depends( "configfile", "/etc/mosdns/config.yaml")
+loglv = s:option(ListValue, "loglv", translate("Log Level"))
+loglv:value("debug", translate("Debug"))
+loglv:value("info", translate("Info"))
+loglv:value("warn", translate("Warning"))
+loglv:value("error", translate("Error"))
+loglv.default = "error"
+loglv:depends( "configfile", "./def_config.yaml")
 
-logfile = s:option(Value, "logfile", translate("Log File"))
-logfile.placeholder = "/tmp/mosdns.log"
-logfile.default = "/tmp/mosdns.log"
-logfile:depends( "configfile", "/etc/mosdns/config.yaml")
+logfile = s:option(Value, "logfile", translate("MosDNS Log File"))
+logfile.placeholder = "/tmp/mosdns.txt"
+logfile.default = "/tmp/mosdns.txt"
+logfile:depends( "configfile", "./def_config.yaml")
 
 remote_dns = s:option(Value, "remote_dns1", translate("Remote DNS"))
-remote_dns.default = "tls://8.8.8.8"
-remote_dns:value("tls://1.1.1.1", "1.1.1.1 (CloudFlare DNS)")
+remote_dns.default = "tls://8.8.4.4"
 remote_dns:value("tls://8.8.8.8", "8.8.8.8 (Google DNS)")
 remote_dns:value("tls://8.8.4.4", "8.8.4.4 (Google DNS)")
+remote_dns:value("tls://9.9.9.9", "9.9.9.9 (Quad9 DNS)")
+remote_dns:value("tls://1.1.1.1", "1.1.1.1 (CloudFlare DNS)")
 remote_dns:value("tls://185.222.222.222", "185.222.222.222 (DNS.SB)")
 remote_dns:value("tls://45.11.45.11", "45.11.45.11 (DNS.SB)")
 remote_dns:value("208.67.222.222", "208.67.222.222 (Open DNS)")
 remote_dns:value("208.67.220.220", "208.67.220.220 (Open DNS)")
-remote_dns:depends( "configfile", "/etc/mosdns/config.yaml")
+remote_dns:depends( "configfile", "./def_config.yaml")
 remote_dns = s:option(Value, "remote_dns2", " ")
-remote_dns.default = "tls://1.1.1.1"
-remote_dns:value("tls://1.1.1.1", "1.1.1.1 (CloudFlare DNS)")
+remote_dns.default = "tls://9.9.9.9"
 remote_dns:value("tls://8.8.8.8", "8.8.8.8 (Google DNS)")
 remote_dns:value("tls://8.8.4.4", "8.8.4.4 (Google DNS)")
+remote_dns:value("tls://9.9.9.9", "9.9.9.9 (Quad9 DNS)")
+remote_dns:value("tls://1.1.1.1", "1.1.1.1 (CloudFlare DNS)")
 remote_dns:value("tls://185.222.222.222", "185.222.222.222 (DNS.SB)")
 remote_dns:value("tls://45.11.45.11", "45.11.45.11 (DNS.SB)")
 remote_dns:value("208.67.222.222", "208.67.222.222 (Open DNS)")
 remote_dns:value("208.67.220.220", "208.67.220.220 (Open DNS)")
-remote_dns:depends( "configfile", "/etc/mosdns/config.yaml")
+remote_dns:depends( "configfile", "./def_config.yaml")
 
-cache_size = s:option(Value, "cache_size", translate("DNS Cache Size"))
-cache_size.datatype = "and(uinteger,min(0))"
-cache_size.default = "200000"
-cache_size:depends( "configfile", "/etc/mosdns/config.yaml")
-
-minimal_ttl = s:option(Value, "minimal_ttl", translate("Minimum TTL"))
-minimal_ttl.datatype = "and(uinteger,min(1))"
-minimal_ttl.datatype = "and(uinteger,max(3600))"
-minimal_ttl.default = "300"
-minimal_ttl:depends( "configfile", "/etc/mosdns/config.yaml")
-
-maximum_ttl = s:option(Value, "maximum_ttl", translate("Maximum TTL"))
-maximum_ttl.datatype = "and(uinteger,min(1))"
-maximum_ttl.default = "3600"
-maximum_ttl:depends( "configfile", "/etc/mosdns/config.yaml")
-
-redirect = s:option(Flag, "redirect", translate("Enable DNS Forward"), translate("Forward Dnsmasq Domain Name resolution requests to MosDNS"))
-redirect:depends( "configfile", "/etc/mosdns/config.yaml")
+redirect = s:option(Flag, "redirect", translate("Enable DNS Redirect"))
+redirect:depends( "configfile", "./def_config.yaml")
 redirect.default = true
 
 adblock = s:option(Flag, "adblock", translate("Enable DNS ADblock"))
-adblock:depends( "configfile", "/etc/mosdns/config.yaml")
-adblock.default = true
+adblock:depends( "configfile", "./def_config.yaml")
+adblock.default = false
 
-config = s:option(TextValue, "manual-config")
-config.description = translate("<font color=\"ff0000\"><strong>View the Custom YAML Configuration file used by this MosDNS. You can edit it as you own need.</strong></font>")
-config.template = "cbi/tvalue"
-config.rows = 25
-config:depends( "configfile", "/etc/mosdns/config_custom.yaml")
-
-function config.cfgvalue(self, section)
-  return nixio.fs.readfile("/etc/mosdns/config_custom.yaml")
+set_config = s:option(Button, "set_config", translate("DNS Helper"))
+set_config.inputtitle = translate("Apply")
+set_config.inputstyle = "reload"
+set_config.description = translate("This will make the necessary adjustments to other plug-in settings.")
+set_config.write = function()
+  luci.sys.exec("/etc/mosdns/set.sh &> /dev/null &")
 end
+set_config:depends( "configfile", "./def_config.yaml")
 
-function config.write(self, section, value)
-  value = value:gsub("\r\n?", "\n")
-  nixio.fs.writefile("/etc/mosdns/config_custom.yaml", value)
+unset_config = s:option(Button, "unset_config", translate("Revert Settings"))
+unset_config.inputtitle = translate("Apply")
+unset_config.inputstyle = "reload"
+unset_config.description = translate("This will revert the adjustments.")
+unset_config.write = function()
+  luci.sys.exec("/etc/mosdns/set.sh unset &> /dev/null &")
 end
 
 return m
