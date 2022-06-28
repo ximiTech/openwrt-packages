@@ -44,6 +44,11 @@ define Package/mosdns
   DEPENDS:=$(GO_ARCH_DEPENDS)
 endef
 
+define Package/mosdns-neo
+  $(call Package/mosdns/Default)
+  DEPENDS:=$(GO_ARCH_DEPENDS) +mosdns
+endef
+
 define Package/mosdns/config
 config MOSDNS_COMPRESS_GOPROXY
 	bool "Compiling with GOPROXY proxy"
@@ -66,7 +71,6 @@ endef
 GO_PKG_TARGET_VARS:=$(filter-out CGO_ENABLED=%,$(GO_PKG_TARGET_VARS)) CGO_ENABLED=0
 
 define Build/Compile
-	cp -rfn $(BUILD_DIR)/mosdns-$(PKG_VERSION)/* $(PKG_BUILD_DIR)
 	$(call GoPackage/Build/Compile)
 ifneq ($(CONFIG_MOSDNS_COMPRESS_UPX),)
 	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/mosdns
@@ -79,3 +83,4 @@ endef
 
 $(eval $(call GoBinPackage,mosdns))
 $(eval $(call BuildPackage,mosdns))
+$(eval $(call BuildPackage,mosdns-neo))
