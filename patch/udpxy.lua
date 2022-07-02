@@ -7,7 +7,7 @@ s = m:section(TypedSection, "udpxy", "")
 s.addremove = true
 s.anonymous = false
 
-enable=s:option(Flag, "disabled", translate("Enabled"))
+enable=s:option(Flag, "disabled", translate("启用"))
 enable.enabled="0"
 enable.disabled="1"
 enable.default = "1"
@@ -15,16 +15,16 @@ enable.rmempty = false
 respawn=s:option(Flag, "respawn", translate("复位"))
 respawn.default = false
 
-verbose=s:option(Flag, "verbose", translate("Verbose"))
+verbose=s:option(Flag, "verbose", translate("详细"))
 verbose.default = false
 
-status=s:option(Flag, "status", translate("Status"))
+status=s:option(Flag, "status", translate("状态"))
 
 bind=s:option(Value, "bind", translate("绑定IP/接口"))
 bind.rmempty = true
 bind.datatype = "or(ipaddr, network)"
 
-port=s:option(Value, "port", translate("Port"))
+port=s:option(Value, "port", translate("端口"))
 port.rmempty = true
 port.datatype = "port"
 
@@ -61,3 +61,4 @@ mcsub_renew.rmempty = true
 mcsub_renew.datatype = "or(0, range(30, 64000))"
 
 return m
+
