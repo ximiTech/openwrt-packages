@@ -52,7 +52,7 @@ jobs:
         rm -rf ./op-oaf
         rm -rf ./op-fileBrowser/*
         rm -rf ./op-aliyun/*
-        rm -rf ./op-socat/*
+        rm -rf ./op-socat/socat
         rm -rf ./op-mosdns/*
         rm -rf ./op-alist/*
         rm -rf ./patch/wall
@@ -107,8 +107,8 @@ jobs:
         svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
         svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
         
-        svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-socat ./op-socat/luci-app-socat
-        svn export https://github.com/coolsnowwolf/packages/trunk/net/socat ./op-socat/socat
+        ## svn export https://github.com/immortalwrt/luci/trunk/applications/luci-app-socat ./op-socat/luci-app-socat
+        svn export https://github.com/immortalwrt/packages/trunk/net/socat ./op-socat/socat
         svn export https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns ./op-mosdns/luci-app-mosdns
         svn export https://github.com/QiuSimons/openwrt-mos/trunk/mosdns ./op-mosdns/mosdns
         git clone https://github.com/sbwml/openwrt-alist ./op-alist/
