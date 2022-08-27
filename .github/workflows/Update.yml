@@ -108,7 +108,7 @@ jobs:
         svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
         svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
         
-        ## svn export https://github.com/immortalwrt/luci/trunk/applications/luci-app-socat ./op-socat/luci-app-socat
+        ## svn export https://github.com/jjm2473/immortalwrt-luci/branches/socat-fn/applications/luci-app-socat ./op-socat/luci-app-socat
         svn export https://github.com/immortalwrt/packages/trunk/net/socat ./op-socat/socat
         svn export https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns ./op-mosdns/luci-app-mosdns
         svn export https://github.com/QiuSimons/openwrt-mos/trunk/mosdns ./op-mosdns/mosdns
