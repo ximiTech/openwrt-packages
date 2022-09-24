@@ -7,13 +7,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alist
-PKG_VERSION:=2.6.4
-PKG_WEB_VERSION:=2.6.4
+PKG_VERSION:=3.0.1
+PKG_WEB_VERSION:=3.0.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/alist-org/alist/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=3860f5cec5d809159c55498874c472386cd6142a932a5e7bbfb3b0f569e3e12b
+PKG_HASH:=1f8b0ae87044e161f1fb880bc70bb457424bb9fc0299ac09dc52d773ea6e03e5
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILE:=LICENSE
@@ -22,8 +22,8 @@ PKG_MAINTAINER:=sbwml <admin@cooluc.com>
 define Download/$(PKG_NAME)-web
   FILE:=$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
   URL_FILE:=dist.tar.gz
-  URL:=https://github.com/alist-org/web-v2/releases/download/$(PKG_WEB_VERSION)/
-  HASH:=4189ce3c523e6b8f6bba55faefabc926f6ef793c8755c5c2a2d3f75532fb2243
+  URL:=https://github.com/alist-org/alist-web/releases/download/$(PKG_WEB_VERSION)/
+  HASH:=038a00e8479fa32370d48fba6616d73abfc090c944cc447dbf98ec39efb5f8ef
 endef
 
 PKG_CONFIG_DEPENDS:=CONFIG_ALIST_COMPRESS_UPX
@@ -32,10 +32,12 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
-GO_PKG:=github.com/Xhofe/alist
-ALIST_PKG:=github.com/Xhofe/alist/conf
+PKG_ALIST:=github.com/alist-org/alist/v3/internal/conf
+GO_PKG:=github.com/alist-org/alist
 GO_PKG_LDFLAGS:=-w -s
-GO_PKG_LDFLAGS_X:=$(ALIST_PKG).GitTag=v$(PKG_VERSION)-$(ARCH)
+GO_PKG_LDFLAGS_X:= \
+	$(PKG_ALIST).Version=v$(PKG_VERSION)-$(ARCH) \
+	$(PKG_ALIST).WebVersion=$(PKG_WEB_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
@@ -66,8 +68,8 @@ endef
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(eval $(call Download,$(PKG_NAME)-web))
-	$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/public -xzf $(DL_DIR)/$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
-	$(CP) ./files/assets/. $(PKG_BUILD_DIR)/public/assets/
+	$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/public/dist -xzf $(DL_DIR)/$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
+	$(CP) ./files/assets/. $(PKG_BUILD_DIR)/public/dist/assets/
 endef
 
 define Build/Compile
