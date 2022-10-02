@@ -55,6 +55,7 @@ jobs:
         rm -rf ./op-socat/socat
         rm -rf ./op-mosdns/*
         rm -rf ./op-alist/*
+        rm -rf ./op-ddnsgo/*
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
         
@@ -116,6 +117,8 @@ jobs:
         rm -rf ./op-alist/.github
         git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
         rm -rf ./luci-app-unblockneteasemusic/.github
+        
+        git clone https://github.com/sirpdboy/luci-app-ddns-go ./op-ddnsgo/
         
 
     - name: Apply
