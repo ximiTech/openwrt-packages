@@ -11,15 +11,16 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=autocore
 PKG_VERSION:=2
-PKG_RELEASE:=11
+PKG_RELEASE:=12
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/autocore-arm
   TITLE:=Arm auto core loadbalance script.
   MAINTAINER:=CN_SZTL
-  DEPENDS:=@(TARGET_bcm27xx||TARGET_bcm53xx||TARGET_ipq40xx||TARGET_ipq806x||TARGET_ipq807x||TARGET_mvebu||TARGET_rockchip||TARGET_armvirt) \
-    +TARGET_bcm27xx:bcm27xx-userland +TARGET_bcm53xx:nvram +ethtool
+  DEPENDS:=@(arm||aarch64) \
+    +TARGET_bcm27xx:bcm27xx-userland \
+	+TARGET_bcm53xx:nvram +ethtool
   VARIANT:=arm
 endef
 
