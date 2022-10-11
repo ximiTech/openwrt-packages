@@ -12,11 +12,14 @@ elif grep -q "ipq807x" "/etc/openwrt_release"; then
 fi
 
 cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
+filogic_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/ieee80211/phy0/hwmon0/temp1_input)"
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
 	echo -n "WiFi:${mt76_temp} ${wifi_temp}"
 elif grep -Eq "ipq807x|ipq806x" "/etc/openwrt_release"; then
-	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"	
+	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
+elif grep -q "filogic" "/etc/openwrt_release"; then
+	echo -n "CPU: ${filogic_temp}"		
 else	
 	echo -n "CPU: ${cpu_temp}"
 fi
