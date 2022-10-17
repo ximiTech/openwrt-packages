@@ -41,9 +41,9 @@ jobs:
         rm -rf ./luci-app-ikoolproxy
         rm -rf ./luci-app-kodexplorer
         rm -rf ./luci-app-unblockneteasemusic
-        rm -rf ./theme-18.06/luci-theme-edge
-        rm -rf ./theme-18.06/luci-theme-ifit
-        rm -rf ./theme-18.06/luci-theme-neobird
+        ## rm -rf ./theme-18.06/luci-theme-edge
+        ## rm -rf ./theme-18.06/luci-theme-ifit
+        ## rm -rf ./theme-18.06/luci-theme-neobird
         rm -rf ./lisaac/*  
         rm -rf ./linkease/iStore
         rm -rf ./linkease/nas-packages-luci
@@ -88,9 +88,9 @@ jobs:
 
         git clone https://github.com/destan19/OpenAppFilter ./op-oaf
                              
-        svn export https://github.com/kenzok8/luci-theme-ifit/trunk/luci-theme-ifit ./theme-18.06/luci-theme-ifit
-        git clone https://github.com/kiddin9/luci-theme-edge -b 18.06 ./theme-18.06/luci-theme-edge 
-        git clone https://github.com/xiangfeidexiaohuo/luci-theme-neobird ./theme-18.06/luci-theme-neobird
+        ## svn export https://github.com/kenzok8/luci-theme-ifit/trunk/luci-theme-ifit ./theme-18.06/luci-theme-ifit
+        ## git clone https://github.com/kiddin9/luci-theme-edge -b 18.06 ./theme-18.06/luci-theme-edge 
+        ## git clone https://github.com/xiangfeidexiaohuo/luci-theme-neobird ./theme-18.06/luci-theme-neobird
                          
         svn export https://github.com/kiddin9/openwrt-packages/trunk/filebrowser ./op-fileBrowser/filebrowser
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-filebrowser ./op-fileBrowser/luci-app-filebrowser
