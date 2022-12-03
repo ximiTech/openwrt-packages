@@ -53,7 +53,7 @@ jobs:
         rm -rf ./op-fileBrowser/*
         rm -rf ./op-aliyun/*
         rm -rf ./op-socat/socat
-        rm -rf ./op-mosdns/*
+        rm -rf ./op-mosdns
         rm -rf ./op-alist/*
         rm -rf ./op-ddnsgo/*
         rm -rf ./patch/wall
@@ -112,8 +112,9 @@ jobs:
         
         ## svn export https://github.com/jjm2473/immortalwrt-luci/branches/socat-fn/applications/luci-app-socat ./op-socat/luci-app-socat
         svn export https://github.com/immortalwrt/packages/trunk/net/socat ./op-socat/socat
-        svn export https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns ./op-mosdns/luci-app-mosdns
-        svn export https://github.com/QiuSimons/openwrt-mos/trunk/mosdns ./op-mosdns/mosdns
+        git clone https://github.com/sbwml/luci-app-mosdns ./op-mosdns
+        rm -rf ./op-mosdns/install.sh
+        rm -rf ./op-mosdns/.github
         git clone https://github.com/sbwml/openwrt-alist ./op-alist/
         rm -rf ./op-alist/.github
         git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
