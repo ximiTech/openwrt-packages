@@ -58,7 +58,6 @@ jobs:
         rm -rf ./op-ddnsgo/*
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
-        rm -rf ./patch/mhz
         
  
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
@@ -121,8 +120,7 @@ jobs:
         rm -rf ./luci-app-unblockneteasemusic/.github
         
         git clone https://github.com/sirpdboy/luci-app-ddns-go ./op-ddnsgo/
-        
-        svn export https://github.com/robimarko/openwrt/branches/ipq807x-5.15-pr/package/utils/mhz ./patch/mhz
+
         
     - name: Apply
       run: |
