@@ -102,8 +102,6 @@ jobs:
         
         git clone https://github.com/xiaorouji/openwrt-passwall ./patch/wall
         rm -rf ./patch/wall/.github
-        rm -rf ./patch/wall/xray-plugin
-        rm -rf ./patch/wall/xray-core
         svn export https://github.com/fw876/helloworld/trunk/redsocks2 ./patch/wall/redsocks2
         svn export https://github.com/fw876/helloworld/trunk/lua-neturl ./patch/wall/lua-neturl
         svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/wall-luci/luci-app-passwall
