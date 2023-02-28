@@ -325,9 +325,14 @@ text, line {
     -moz-osx-font-smoothing: grayscale;
 }
 
-input.cbi-button.cbi-button-add {
-    /* margin-left: 10px; */
+/* fix luci-app-passwall2 button style */
+.node-services-passwall2 #cbi-passwall2 {
+    text-align: center;
 }
+.node-services-passwall2 input.cbi-button.cbi-button {
+    max-width: unset;
+}
+
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-family: -apple-system, 'Microsoft Yahei';
@@ -3246,10 +3251,17 @@ form[action="/cgi-bin/luci/admin/network/wireless_join"] input[class="cbi-button
 }
 .node-system-commands .commandbox {
     width: auto;
+    display: inline-block;
+    float: unset;
 }
 .node-system-commands .commandbox p {
     word-break:keep-all;
     white-space:nowrap;
+}
+.node-system-commands fieldset.cbi-section {
+    align-items: center;
+    text-align: center;
+    margin:auto;
 }
 
 .node-network-network .ifacebox strong{
