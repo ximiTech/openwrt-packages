@@ -58,8 +58,9 @@ jobs:
         rm -rf ./op-ddnsgo/*
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
+        rm -rf ./op-smartdns/luci-app-smartdns
         
- 
+         
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
         git clone https://github.com/tty228/luci-app-serverchan ./luci-app-serverchan
         git clone https://github.com/ntlf9t/luci-app-easymesh ./luci-app-easymesh
@@ -107,7 +108,7 @@ jobs:
         svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/wall-luci/luci-app-passwall
         svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/wall-luci/luci-app-ssr-plus
         ## svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
-        svn checkout https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
+        svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
         
         ## svn export https://github.com/jjm2473/immortalwrt-luci/branches/socat-fn/applications/luci-app-socat ./op-socat/luci-app-socat
         svn export https://github.com/immortalwrt/packages/trunk/net/socat ./op-socat/socat
@@ -120,6 +121,9 @@ jobs:
         rm -rf ./luci-app-unblockneteasemusic/.github
         
         git clone https://github.com/sirpdboy/luci-app-ddns-go ./op-ddnsgo/
+        
+        git clone https://github.com/pymumu/luci-app-smartdns -b lede ./op-smartdns/luci-app-smartdns
+        rm -rf ./op-smartdns/luci-app-smartdns/.git
 
         
     - name: Apply
