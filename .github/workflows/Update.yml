@@ -121,7 +121,7 @@ jobs:
               
         git clone https://github.com/xiangfeidexiaohuo/luci-theme-design -b main ./theme-18.06/luci-theme-design
         rm -rf ./theme-18.06/luci-theme-design/.git
-        rm -rf ./theme-18.06/luci-theme-design/.github
+        ## rm -rf ./theme-18.06/luci-theme-design/.github
         rm -rf ./theme-18.06/luci-theme-design/LICENSE
         rm -rf ./theme-18.06/luci-theme-design/README.md
         rm -rf ./theme-18.06/luci-theme-design/preview
