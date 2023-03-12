@@ -56,6 +56,7 @@ jobs:
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
         rm -rf ./op-smartdns/luci-app-smartdns
+        rm -rf ./theme-18.06/luci-theme-design
         
          
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
@@ -117,7 +118,13 @@ jobs:
         
         git clone https://github.com/pymumu/luci-app-smartdns -b lede ./op-smartdns/luci-app-smartdns
         rm -rf ./op-smartdns/luci-app-smartdns/.git
-
+              
+        git clone https://github.com/xiangfeidexiaohuo/luci-theme-design -b main ./theme-18.06/luci-theme-design
+        rm -rf ./theme-18.06/luci-theme-design/.git
+        rm -rf ./theme-18.06/luci-theme-design/.github
+        rm -rf ./theme-18.06/luci-theme-design/LICENSE
+        rm -rf ./theme-18.06/luci-theme-design/README.md
+        rm -rf ./theme-18.06/luci-theme-design/preview
         
     - name: Apply
       run: |
