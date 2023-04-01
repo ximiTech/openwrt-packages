@@ -17,6 +17,15 @@ DISTRIB_ARCH = nil
 LOG_FILE = "/tmp/log/" .. appname .. ".log"
 CACHE_PATH = "/tmp/etc/" .. appname .. "_tmp"
 
+function log(...)
+    local result = os.date("%Y-%m-%d %H:%M:%S: ") .. table.concat({...}, " ")
+    local f, err = io.open(LOG_FILE, "a")
+    if f and err == nil then
+        f:write(result .. "\n")
+        f:close()
+    end
+end
+
 function exec_call(cmd)
 	local process = io.popen(cmd .. '; echo -e "\n$?"')
 	local lines = {}
@@ -413,7 +422,9 @@ local function get_bin_version_cache(file, cmd)
 end
 
 function get_app_path(app_name)
+	local def_path = com[app_name].default_path
 	local path = uci_get_type("global_app", app_name:gsub("%-","_") .. "_file")
+	path = path and (#path>0 and path or def_path) or def_path
 	return path
 end
 
