@@ -174,8 +174,8 @@ return view.extend({
 			('启用后，可屏蔽应用内<strong>部分</strong>广告。'));
 		o.default = o.disabled;
 
-		o = s.option(form.ListValue, 'local_vip', _('启用本地 VIP'),
-			_('启用后，可以使用去广告、个性换肤、鲸云音效等本地功能。'));
+		o = s.option(form.ListValue, 'local_vip', _('伪装本地 VIP'),
+			_('设置后，可以使用去广告、个性换肤、鲸云音效等本地功能。'));
 		o.value('', _('禁用'));
 		o.value('cvip', _('CVIP'));
 		o.value('svip', _('SVIP'));
