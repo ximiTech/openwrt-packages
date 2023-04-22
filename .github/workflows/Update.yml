@@ -53,6 +53,7 @@ jobs:
         rm -rf ./op-mosdns
         rm -rf ./op-alist/*
         rm -rf ./op-ddnsgo/*
+        rm -rf ./op-lucky/*
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
         rm -rf ./op-smartdns/luci-app-smartdns
@@ -85,6 +86,7 @@ jobs:
         git clone https://github.com/jerrykuku/luci-app-argon-config ./jerrykuku/luci-app-argon-config
         rm -rf ./jerrykuku/luci-theme-argon/.github
         rm -rf ./jerrykuku/luci-theme-argon/.gitignore
+        rm -rf ./jerrykuku/luci-theme-argon-18.06/.github
         rm -rf ./jerrykuku/luci-theme-argon-18.06/.gitignore
 
         git clone https://github.com/destan19/OpenAppFilter ./op-oaf
@@ -118,6 +120,7 @@ jobs:
         rm -rf ./luci-app-unblockneteasemusic/.github
         
         git clone https://github.com/sirpdboy/luci-app-ddns-go ./op-ddnsgo/
+        git clone https://github.com/sirpdboy/luci-app-lucky ./op-lucky/
         
         git clone https://github.com/pymumu/luci-app-smartdns -b lede ./op-smartdns/luci-app-smartdns
         rm -rf ./op-smartdns/luci-app-smartdns/.git
