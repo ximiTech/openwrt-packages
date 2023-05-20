@@ -51,7 +51,7 @@ jobs:
         rm -rf ./op-aliyun/*
         rm -rf ./op-socat/socat
         rm -rf ./op-mosdns
-        ## rm -rf ./op-alist/*
+        rm -rf ./op-alist/*
         rm -rf ./op-ddnsgo/*
         rm -rf ./op-lucky/*
         rm -rf ./patch/wall
@@ -114,8 +114,8 @@ jobs:
         git clone https://github.com/sbwml/luci-app-mosdns ./op-mosdns
         rm -rf ./op-mosdns/install.sh
         rm -rf ./op-mosdns/.github
-        ## git clone https://github.com/sbwml/openwrt-alist ./op-alist/
-        ## rm -rf ./op-alist/.github
+        git clone https://github.com/sbwml/openwrt-alist ./op-alist/
+        rm -rf ./op-alist/.github
         git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
         rm -rf ./luci-app-unblockneteasemusic/.github
         
