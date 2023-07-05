@@ -81,9 +81,6 @@ start_service() {
 	cat > $data_dir/config.json <<EOF
 {
   "force": false,
-  "address": "$listen_addr",
-  "port": $port,
-  "https_port": $port,
   "site_url": "$site_url",
   "cdn": "",
   "jwt_secret": "",
