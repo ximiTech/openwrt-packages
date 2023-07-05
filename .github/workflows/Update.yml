@@ -105,6 +105,7 @@ jobs:
         svn export https://github.com/fw876/helloworld/trunk/redsocks2 ./patch/wall/redsocks2
         svn export https://github.com/fw876/helloworld/trunk/lua-neturl ./patch/wall/lua-neturl
         svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/wall-luci/luci-app-passwall
+        svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 ./patch/wall-luci/luci-app-passwall2
         svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/wall-luci/luci-app-ssr-plus
         ## svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
         svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
