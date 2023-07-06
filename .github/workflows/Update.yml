@@ -57,42 +57,42 @@ jobs:
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
         rm -rf ./op-smartdns/luci-app-smartdns
-        rm -rf ./theme-18.06/luci-theme-design
+        rm -rf ./theme/luci-theme-argon-18.06
+        rm -rf ./theme/luci-theme-argon
         
          
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
         git clone https://github.com/tty228/luci-app-wechatpush ./luci-app-wechatpush
         git clone https://github.com/ntlf9t/luci-app-easymesh ./luci-app-easymesh
-        git clone https://github.com/yaof2/luci-app-ikoolproxy ./luci-app-ikoolproxy
+        git clone https://github.com/ilxp/luci-app-ikoolproxy ./luci-app-ikoolproxy
         rm -rf ./luci-app-ikoolproxy/.github       
         svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-kodexplorer ./luci-app-kodexplorer
-        
+
+      
         svn export https://github.com/lisaac/luci-lib-docker/trunk/collections/luci-lib-docker ./lisaac/luci-lib-docker
         svn export https://github.com/lisaac/luci-app-diskman/trunk/applications/luci-app-diskman ./lisaac/luci-app-diskman
         svn export https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman ./lisaac/luci-app-dockerman
-        
+
+       
         svn export https://github.com/linkease/nas-packages-luci/trunk/luci ./linkease/nas-packages-luci
         svn export https://github.com/linkease/nas-packages/trunk/network/services ./linkease/nas-packages
-        svn export https://github.com/linkease/nas-packages/trunk/multimedia/ffmpeg-remux ./linkease/nas-packages/ffmpeg-remux
-      
+        svn export https://github.com/linkease/nas-packages/trunk/multimedia/ffmpeg-remux ./linkease/nas-packages/ffmpeg-remux    
         svn export https://github.com/linkease/istore/trunk/luci ./linkease/iStore
         svn export https://github.com/linkease/istore-ui/trunk/app-store-ui ./linkease/iStore/app-store-ui
-              
+ 
+             
         git clone https://github.com/jerrykuku/luci-app-vssr ./jerrykuku/luci-app-vssr
         git clone https://github.com/jerrykuku/lua-maxminddb ./jerrykuku/lua-maxminddb
-        ## git clone https://github.com/jerrykuku/luci-app-jd-dailybonus ./jerrykuku/luci-app-jd-dailybonus
-        git clone https://github.com/jerrykuku/luci-theme-argon ./jerrykuku/luci-theme-argon
-        git clone https://github.com/jerrykuku/luci-theme-argon -b 18.06 ./jerrykuku/luci-theme-argon-18.06
-        git clone https://github.com/jerrykuku/luci-app-argon-config ./jerrykuku/luci-app-argon-config
-        rm -rf ./jerrykuku/luci-theme-argon/.github
-        rm -rf ./jerrykuku/luci-theme-argon/.gitignore
-        rm -rf ./jerrykuku/luci-theme-argon-18.06/.github
-        rm -rf ./jerrykuku/luci-theme-argon-18.06/.gitignore
+        git clone https://github.com/jerrykuku/go-aliyundrive-webdav ./jerrykuku/go-aliyundrive-webdav
+        git clone https://github.com/jerrykuku/luci-app-go-aliyundrive-webdav ./jerrykuku/luci-app-go-aliyundrive-webdav
+
 
         git clone https://github.com/destan19/OpenAppFilter ./op-oaf
+
                          
         svn export https://github.com/kiddin9/openwrt-packages/trunk/filebrowser ./op-fileBrowser/filebrowser
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-filebrowser ./op-fileBrowser/luci-app-filebrowser
+
         
         svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/aliyundrive-webdav ./op-aliyun/aliyundrive-webdav
         svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app-aliyundrive-webdav ./op-aliyun/luci-app-aliyundrive-webdav
@@ -107,12 +107,14 @@ jobs:
         svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./patch/wall-luci/luci-app-passwall
         svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 ./patch/wall-luci/luci-app-passwall2
         svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./patch/wall-luci/luci-app-ssr-plus
-        ## svn export https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
         svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash ./patch/wall-luci/luci-app-openclash
         svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-bypass ./patch/wall-luci/luci-app-bypass
+
         
         ## svn export https://github.com/jjm2473/immortalwrt-luci/branches/socat-fn/applications/luci-app-socat ./op-socat/luci-app-socat
         svn export https://github.com/immortalwrt/packages/trunk/net/socat ./op-socat/socat
+        
+
         git clone https://github.com/sbwml/luci-app-mosdns ./op-mosdns
         rm -rf ./op-mosdns/install.sh
         rm -rf ./op-mosdns/.github
@@ -120,19 +122,27 @@ jobs:
         rm -rf ./op-alist/.github
         git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic ./luci-app-unblockneteasemusic/
         rm -rf ./luci-app-unblockneteasemusic/.github
-        
+ 
+       
         git clone https://github.com/sirpdboy/luci-app-ddns-go ./op-ddnsgo/
         git clone https://github.com/sirpdboy/luci-app-lucky ./op-lucky/
-        
+
+       
         git clone https://github.com/pymumu/luci-app-smartdns -b lede ./op-smartdns/luci-app-smartdns
         rm -rf ./op-smartdns/luci-app-smartdns/.git
-              
-        git clone https://github.com/xiangfeidexiaohuo/luci-theme-design -b main ./theme-18.06/luci-theme-design
-        rm -rf ./theme-18.06/luci-theme-design/.git
-        ## rm -rf ./theme-18.06/luci-theme-design/.github
-        rm -rf ./theme-18.06/luci-theme-design/LICENSE
-        rm -rf ./theme-18.06/luci-theme-design/README.md
-        rm -rf ./theme-18.06/luci-theme-design/preview
+
+
+        git clone https://github.com/jerrykuku/luci-theme-argon ./theme/luci-theme-argon
+        git clone https://github.com/jerrykuku/luci-theme-argon -b 18.06 ./theme/luci-theme-argon-18.06
+        # git clone https://github.com/jerrykuku/luci-app-argon-config ./theme/luci-app-argon-config
+        # git clone https://github.com/jerrykuku/luci-app-argon-config -b 18.06 ./theme/luci-app-argon-config-18.06       
+        rm -rf ./theme/luci-theme-argon/.github
+        rm -rf ./theme/luci-theme-argon/.gitignore
+        rm -rf ./theme/luci-theme-argon-18.06/.github
+        rm -rf ./theme/luci-theme-argon-18.06/.gitignore
+        # rm -rf ./theme/luci-app-argon-config/.github
+        # rm -rf ./theme/luci-app-argon-config-18.06/.github
+          
         
     - name: Apply
       run: |
