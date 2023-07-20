@@ -7,24 +7,21 @@ fi
 
 if grep -Eq "ipq40xx|ipq806x" "/etc/openwrt_release"; then
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/device/hwmon/hwmon*/temp1_input | awk '$1=$1')"
-elif grep -q "ipq807x" "/etc/openwrt_release"; then
+elif grep -Eq "ipq807x|filogic" "/etc/openwrt_release"; then
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
 fi
 
 cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/thermal/thermal_zone0/temp)"
-filogic_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' /sys/class/ieee80211/phy0/hwmon0/temp1_input)"
+mtk_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
 	echo -n "WiFi:${mt76_temp} ${wifi_temp}"
-elif grep -Eq "ipq807x|ipq806x" "/etc/openwrt_release"; then
+elif grep -Eq "ipq807x|ipq806x|filogic" "/etc/openwrt_release"; then
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
-elif grep -q "filogic" "/etc/openwrt_release"; then
-	echo -n "CPU: ${filogic_temp}"		
 else
-	mt7921_path="/sys/class/ieee80211/phy0/hwmon2/temp1_input"
-	if [ -e "${mt7921_path}" ]; then
-	mt7921_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
-	echo -n "CPU: ${cpu_temp}, WiFi: ${mt7921_temp}"
+	mt79_path="/sys/class/ieee80211/phy*/hwmon*/temp1_input"
+	if [ -e "${mt79_path}" ]; then
+	echo -n "CPU: ${cpu_temp}, WiFi: ${mtk_temp}"
 	else
 	echo -n "CPU: ${cpu_temp}"	
 	fi	
