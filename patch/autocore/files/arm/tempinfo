@@ -7,7 +7,7 @@ fi
 
 if grep -Eq "ipq40xx|ipq806x" "/etc/openwrt_release"; then
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/device/hwmon/hwmon*/temp1_input | awk '$1=$1')"
-elif grep -Eq "ipq807x|filogic|AX6S" "/etc/openwrt_release"; then
+elif grep -Eq "ipq807x|filogic|mt7622" "/etc/openwrt_release"; then
 	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
 fi
 
@@ -16,7 +16,7 @@ mtk_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmo
 
 if grep -q "ipq40xx" "/etc/openwrt_release"; then
 	echo -n "WiFi:${mt76_temp} ${wifi_temp}"
-elif grep -Eq "ipq807x|ipq806x|filogic|AX6S" "/etc/openwrt_release"; then
+elif grep -Eq "ipq807x|ipq806x|filogic|mt7622" "/etc/openwrt_release"; then
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
 else
 	mt79_path="/sys/class/ieee80211/phy*/hwmon*/temp1_input"
