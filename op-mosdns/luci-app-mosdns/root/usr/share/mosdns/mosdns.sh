@@ -19,7 +19,11 @@ interface_dns() (
         peerdns=$(uci -q get network.wan.peerdns)
         proto=$(uci -q get network.wan.proto)
         if [ "$peerdns" = 0 ] || [ "$proto" = "static" ]; then
-            uci -q get network.wan.dns
+            ipv6_check=$(uci -q get network.wan.dns)
+            case "$ipv6_check" in
+                *:*) echo $(uci -q get network.wan.dns) | sed "s/\(.*\) \([0-9a-fA-F:]*\)\(.*\)/\1 '[\2]'\3/" ;;
+                *) uci -q get network.wan.dns ;;
+            esac
         else
             interface_status=$(ubus call network.interface.wan status)
             echo $interface_status | jsonfilter -e "@['dns-server'][0]"
