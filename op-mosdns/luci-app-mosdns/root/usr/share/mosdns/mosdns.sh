@@ -21,7 +21,8 @@ interface_dns() (
         if [ "$peerdns" = 0 ] || [ "$proto" = "static" ]; then
             ipv6_check=$(uci -q get network.wan.dns)
             case "$ipv6_check" in
-                *:*) echo $(uci -q get network.wan.dns) | sed "s/\(.*\) \([0-9a-fA-F:]*\)\(.*\)/\1 '[\2]'\3/" ;;
+                # ipv6 format
+                *:*) echo $(uci -q get network.wan.dns) | sed "s/[^ ]*:[^ ]*/'[&]'/g" ;;
                 *) uci -q get network.wan.dns ;;
             esac
         else
