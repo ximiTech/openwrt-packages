@@ -32,6 +32,12 @@ msgstr "延迟时间【开机用】"
 msgid "Log"
 msgstr "日志"
 
+msgid "Reverse"
+msgstr "撤销"
+
+msgid "Clear Log"
+msgstr "清除日志"
+
 msgid "Scheduled Reboot"
 msgstr "重启机器"
 
