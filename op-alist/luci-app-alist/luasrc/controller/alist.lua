@@ -15,6 +15,7 @@ function index()
 	entry({"admin", "nas", "alist", "alist_status"}, call("alist_status")).leaf = true
 	entry({"admin", "nas", "alist", "get_log"}, call("get_log")).leaf = true
 	entry({"admin", "nas", "alist", "clear_log"}, call("clear_log")).leaf = true
+	entry({"admin", "nas", "alist", "admin_info"}, call("admin_info")).leaf = true
 end
 
 function alist_status()
@@ -37,4 +38,13 @@ end
 
 function clear_log()
 	luci.sys.call("cat /dev/null > $(uci -q get alist.@alist[0].temp_dir)/alist.log")
+end
+
+function admin_info()
+	local random = luci.sys.exec("/usr/bin/alist --data $(uci -q get alist.@alist[0].data_dir) admin random 2>&1")
+	local username = string.match(random, "username: (%S+)")
+	local password = string.match(random, "password: (%S+)")
+
+	luci.http.prepare_content("application/json")
+	luci.http.write_json({username = username, password = password})
 end
