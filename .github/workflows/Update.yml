@@ -142,6 +142,8 @@ jobs:
         rm -rf ./theme/luci-theme-argon-18.06/.gitignore
         # rm -rf ./theme/luci-app-argon-config/.github
         # rm -rf ./theme/luci-app-argon-config-18.06/.github
+           
+        svn export https://github.com/unifreq/luci-app-oled/trunk/luci-app-oled ./luci-app-oled
           
         
     - name: Apply
