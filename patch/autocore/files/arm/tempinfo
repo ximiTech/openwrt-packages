@@ -18,11 +18,5 @@ if grep -q "ipq40xx" "/etc/openwrt_release"; then
 elif grep -Eq "ipq807x|ipq806x|filogic|mt7622" "/etc/openwrt_release"; then
 	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
 else
-	mt79_path="/sys/class/ieee80211/phy0/hwmon2/temp1_input"
-	mt79_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' /sys/class/ieee80211/phy*/hwmon*/temp1_input | awk '$1=$1')"
-	if [ -e "${mt79_path}" ]; then
-	echo -n "CPU: ${cpu_temp}, WiFi: ${mt79_temp}"
-	else
 	echo -n "CPU: ${cpu_temp}"	
-	fi	
 fi
