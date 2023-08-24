@@ -59,6 +59,7 @@ jobs:
         rm -rf ./op-smartdns/luci-app-smartdns
         rm -rf ./theme/luci-theme-argon-18.06
         rm -rf ./theme/luci-theme-argon
+        rm -rf ./luci-app-oled
         
          
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
