@@ -54,6 +54,7 @@ jobs:
         rm -rf ./op-alist/*
         rm -rf ./op-ddnsgo/*
         rm -rf ./op-lucky/*
+        rm -rf ./op-xunlei/*
         rm -rf ./patch/wall
         rm -rf ./patch/wall-luci
         rm -rf ./op-smartdns/luci-app-smartdns
@@ -145,7 +146,9 @@ jobs:
         # rm -rf ./theme/luci-app-argon-config-18.06/.github
            
         svn export https://github.com/unifreq/luci-app-oled/trunk/luci-app-oled ./luci-app-oled
-          
+        
+        svn export https://github.com/gngpp/xunlei/trunk/openwrt/luci-app-xunlei ./op-xunlei/luci-app-xunlei
+        svn export https://github.com/gngpp/xunlei/trunk/openwrt/xunlei ./op-xunlei/xunlei
         
     - name: Apply
       run: |
