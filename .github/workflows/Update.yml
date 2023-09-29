@@ -37,7 +37,7 @@ jobs:
 
         rm -rf ./luci-app-pushbot
         rm -rf ./luci-app-wechatpush
-        rm -rf ./luci-app-easymesh
+        # rm -rf ./luci-app-easymesh
         rm -rf ./luci-app-ikoolproxy
         rm -rf ./luci-app-kodexplorer
         rm -rf ./luci-app-unblockneteasemusic
@@ -65,7 +65,7 @@ jobs:
          
         git clone https://github.com/zzsj0928/luci-app-pushbot ./luci-app-pushbot
         git clone https://github.com/tty228/luci-app-wechatpush ./luci-app-wechatpush
-        git clone https://github.com/stevenke1981/luci-app-easymesh ./luci-app-easymesh
+        # git clone https://github.com/stevenke1981/luci-app-easymesh ./luci-app-easymesh
         git clone https://github.com/ilxp/luci-app-ikoolproxy ./luci-app-ikoolproxy
         rm -rf ./luci-app-ikoolproxy/.github       
         svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-kodexplorer ./luci-app-kodexplorer
