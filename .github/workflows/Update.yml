@@ -106,6 +106,7 @@ jobs:
         rm -rf ./patch/wall/.github
         svn export https://github.com/fw876/helloworld/trunk/redsocks2 ./patch/wall/redsocks2
         svn export https://github.com/fw876/helloworld/trunk/lua-neturl ./patch/wall/lua-neturl
+        svn export https://github.com/fw876/helloworld/trunk/shadow-tls ./patch/wall/shadow-tls
         
         svn export https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall ./patch/wall-luci/luci-app-passwall
         svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 ./patch/wall-luci/luci-app-passwall2      
